@@ -1,4 +1,5 @@
 const express = require("express");
+
 const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
@@ -6,7 +7,10 @@ const dotenv = require("dotenv").config({ path: ".env" });
 const ApiError = require("./utils/apiError");
 const globalErrorHandler = require("./middlewares/errorMiddleware");
 const dbConnection = require("./config/database");
-const categoryRoute = require("./routes/categoryRoute.js");
+//routes
+const categoryRoute = require("./routes/categoryRoute");
+const subCategoryRoute = require("./routes/subCategoryRoute");
+const brandRoute = require("./routes/brandRoute");
 
 // db connection
 dbConnection();
@@ -23,6 +27,8 @@ app.use(express.json());
 
 //routes
 app.use("/api/v1/categories", categoryRoute);
+app.use("/api/v1/subcategories", subCategoryRoute);
+app.use("/api/v1/brands", brandRoute);
 
 //handle undefined routes
 app.all("*", (req, res, next) => {

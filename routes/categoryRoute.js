@@ -6,14 +6,19 @@ const {
   updateCategoryValidator,
 } = require("../utils/validators/categoryValidator");
 const {
-  getCategory,
+  getCategories,
   createCategory,
   getSpecificCategory,
   updateCategory,
   deleteCategory,
 } = require("../controllers/categoryCtrl");
 
-router.get("/", getCategory);
+const subCategoryRoute = require(`./subCategoryRoute`);
+//nested routes
+//api/v1/categories/categoryId/subcategories
+router.use(`/:categoryId/subcategories`, subCategoryRoute);
+
+router.get("/", getCategories);
 router.post("/", createCategoryValidator, createCategory);
 router
   .route("/:id")
