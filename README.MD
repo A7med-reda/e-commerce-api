@@ -11,4 +11,4 @@ Authentication: Authenticate your requests by including the API credentials in t
 
 API Base URL: All API requests should be sent to the base URL. For example: https://api.ecommerce.com.
 
-Endpoints: Refer to the API documentation for a list of available endpoints and their functionaliti
+Endpoints: Refer to the API documentation for a list of available endpoints and their functionalitiy
