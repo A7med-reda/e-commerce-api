@@ -1,7 +1,14 @@
 ### Full E-Commerce RESTful APIs
 
 ## Node.js & Express
- 
+#Features 
+- Categories CRUD Operations
+- Advanced Error Handling & Adding Validation Layer
+- SubCategories CRUD & Brands CRUD Operations
+- Products CRUD Operations
+
+
+
 Getting Started
 To start using the E-Commerce API, follow the steps below:
 
