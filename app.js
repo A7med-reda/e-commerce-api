@@ -1,16 +1,17 @@
 const express = require("express");
 
 const app = express();
-const cors = require("cors");
 const morgan = require("morgan");
-const dotenv = require("dotenv").config({ path: ".env" });
+const dotenv = require("dotenv").config(".env");
 const ApiError = require("./utils/apiError");
 const globalErrorHandler = require("./middlewares/errorMiddleware");
 const dbConnection = require("./config/database");
+
 //routes
 const categoryRoute = require("./routes/categoryRoute");
 const subCategoryRoute = require("./routes/subCategoryRoute");
 const brandRoute = require("./routes/brandRoute");
+const productRoute = require("./routes/productRoute");
 
 // db connection
 dbConnection();
@@ -21,7 +22,6 @@ if (process.env.Node_ENV === "development") {
 }
 
 //middleware
-app.use(cors()); // Api key Better
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -29,6 +29,7 @@ app.use(express.json());
 app.use("/api/v1/categories", categoryRoute);
 app.use("/api/v1/subcategories", subCategoryRoute);
 app.use("/api/v1/brands", brandRoute);
+app.use("/api/v1/products", productRoute);
 
 //handle undefined routes
 app.all("*", (req, res, next) => {

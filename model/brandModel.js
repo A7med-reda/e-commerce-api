@@ -10,10 +10,10 @@ const brandSchema = new mongoose.Schema(
       minLength: [3, "Too short for category name"],
       maxLength: [32, "Too big fro category name"],
     },
-    slug: { type: String, lowercase: true }, 
+    slug: { type: String, lowercase: true },
     image: String,
   },
   { timestamps: true }
 );
 
-module.exports = new mongoose.model("brand", brandSchema);
+module.exports = new mongoose.model("Brand", brandSchema);

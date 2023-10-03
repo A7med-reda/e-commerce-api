@@ -4,6 +4,7 @@ const categorySchema = new mongoose.Schema(
   {
     name: {
       type: String,
+      trim: true,
       required: [true, "Category name required"],
       unique: [true, "Category name must be unique"],
       minLength: [3, "Too short for category name"],
@@ -15,4 +16,4 @@ const categorySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = new mongoose.model("category", categorySchema);
+module.exports = new mongoose.model("Category", categorySchema);

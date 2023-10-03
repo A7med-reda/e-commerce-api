@@ -13,11 +13,11 @@ const subCategorySchema = mongoose.Schema(
     slug: { type: String, lowercase: true },
     parentCategory: {
       type: mongoose.Schema.ObjectId,
-      ref: "category", //  model name of parent from model method , replace || populate()
+      ref: "Category", //  model name of parent from model method , replace || populate()
       required: [true, "subCategory Must Blog to a Parent Category "],
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("subCategory", subCategorySchema);
+module.exports = mongoose.model("SubCategory", subCategorySchema);

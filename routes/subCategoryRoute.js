@@ -1,9 +1,10 @@
-//mergeParams : Allow to access parameters i  n other routes
+//mergeParams : Allow to access parameters in other routes
 //ex : we want to access categoryId from categoryRoute
 const router = require("express").Router({ mergeParams: true });
 const {
   CreateSubCategory,
   getSubCategories,
+  createFilterObj,
   getSpecificSubCategory,
   updateSubCategory,
   deleteSubCategory,
@@ -18,7 +19,7 @@ const {
 router
   .route("/")
   .post(createSubCategoryValidator, CreateSubCategory)
-  .get(getSubCategories);
+  .get(createFilterObj, getSubCategories);
 router
   .route("/:id")
   .get(getSubCategoryValidator, getSpecificSubCategory)
