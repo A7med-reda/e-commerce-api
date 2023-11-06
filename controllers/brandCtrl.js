@@ -10,6 +10,7 @@ exports.uploadBrandImage = uploadSingleImage("image");
 
 // resize image
 exports.resizeImage = asyncHandler(async (req, res, next) => {
+  console.log(req);
   const filename = `brand-${Date.now()}.jpeg`;
   await sharp(req.file.buffer)
     .resize(600, 600)
