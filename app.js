@@ -1,8 +1,9 @@
-const express = require("express");
+const path = require("path");
 
-const app = express();
+const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv").config(".env");
+
 const ApiError = require("./utils/apiError");
 const globalErrorHandler = require("./middlewares/errorMiddleware");
 const dbConnection = require("./config/database");
@@ -16,14 +17,18 @@ const productRoute = require("./routes/productRoute");
 // db connection
 dbConnection();
 
-if (process.env.Node_ENV === "development") {
-  app.use(morgan("dev"));
-  console.log(`env ${process.env.Node_ENV}`);
-}
+// express app
+const app = express();
 
 //middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "uploads")));
+
+if (process.env.Node_ENV === "development") {
+  app.use(morgan("dev"));
+  console.log(`env ${process.env.Node_ENV}`);
+}
 
 //routes
 app.use("/api/v1/categories", categoryRoute);
@@ -31,13 +36,13 @@ app.use("/api/v1/subcategories", subCategoryRoute);
 app.use("/api/v1/brands", brandRoute);
 app.use("/api/v1/products", productRoute);
 
-//handle undefined routes
+// handle undefined routes
 app.all("*", (req, res, next) => {
   // const error = new Error(`can't find this route ${req.originalUrl}`);
   next(new ApiError(`can't find this route ${req.originalUrl}`, 400));
 });
 
-//global error handler middleware
+// global error handler middleware
 app.use(globalErrorHandler);
 
 const PORT = process.env.PORT || 8000;

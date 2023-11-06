@@ -11,14 +11,18 @@ const {
   getSpecificBrand,
   updateBrand,
   deleteBrand,
+  uploadBrandImage,
+  resizeImage,
 } = require("../controllers/brandCtrl");
 
-router.get("/", getBrands);
-router.post("/", createBrandValidator, createBrand);
+router
+  .route("/")
+  .get(getBrands)
+  .post(uploadBrandImage, resizeImage, createBrandValidator, createBrand);
 router
   .route("/:id")
   .get(getBrandValidator, getSpecificBrand)
-  .put(updateBrandValidator, updateBrand)
+  .put(uploadBrandImage, resizeImage, updateBrandValidator, updateBrand)
   .delete(deleteBrandValidator, deleteBrand);
 
 module.exports = router;

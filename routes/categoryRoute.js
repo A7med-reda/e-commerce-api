@@ -11,6 +11,8 @@ const {
   getSpecificCategory,
   updateCategory,
   deleteCategory,
+  uploadCategoryImage,
+  resizeImage,
 } = require("../controllers/categoryCtrl");
 
 const subCategoryRoute = require(`./subCategoryRoute`);
@@ -18,12 +20,24 @@ const subCategoryRoute = require(`./subCategoryRoute`);
 //api/v1/categories/categoryId/subcategories
 router.use(`/:categoryId/subcategories`, subCategoryRoute);
 
-router.get("/", getCategories);
-router.post("/", createCategoryValidator, createCategory);
+router
+  .route("/")
+  .get(getCategories)
+  .post(
+    uploadCategoryImage,
+    resizeImage,
+    createCategoryValidator,
+    createCategory
+  );
 router
   .route("/:id")
   .get(getCategoryValidator, getSpecificCategory)
-  .put(updateCategoryValidator, updateCategory)
+  .put(
+    uploadCategoryImage,
+    resizeImage,
+    updateCategoryValidator,
+    updateCategory
+  )
   .delete(deleteCategoryValidator, deleteCategory);
 
 module.exports = router;

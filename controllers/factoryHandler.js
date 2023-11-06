@@ -47,6 +47,7 @@ exports.getOne = (Model) =>
 exports.getAll = (Model, modelName = " ") =>
   asyncHandler(async (req, res, next) => {
     // build Query
+    // nested route subCategory
     let filter = {};
     if (req.filterObj) {
       filter = req.filterObj;

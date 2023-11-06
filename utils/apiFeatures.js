@@ -39,12 +39,13 @@ class ApiFeatures {
       "keyword",
     ];
     excludedQueryStringObj.forEach((el) => delete queryStringObj[el]);
-    // Apply flirting [gte , gt , lte, lt]  $ -> not found in URL
+    // Apply flirting [gte , gt , lte, lt] add $ -> not found in URL
     let queryString = JSON.stringify(queryStringObj);
     queryString = queryString.replace(
       /\b(gte|gt|lte|lt)\b/g,
       (match) => `$${match}`
     );
+
     this.mongooseQuery = this.mongooseQuery.find(JSON.parse(queryString));
     return this;
   }

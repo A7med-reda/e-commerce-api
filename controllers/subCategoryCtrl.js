@@ -1,13 +1,14 @@
 const SubCategory = require("../model/subCategoryModel");
-const factoryHandler = require("./factoryHandler");
+const factory = require("./factoryHandler");
 
 //@desc    create subCategory
 //@route   POST api/v1/subcategories
 //@access  private
-exports.CreateSubCategory = factoryHandler.createOne(SubCategory);
+exports.CreateSubCategory = factory.createOne(SubCategory);
 
-// Nested route
-// GET /api/v1/categories/:categoryId/subcategories
+//@desc   Nested route
+//@route  GET /api/v1/categories/:categoryId/subcategories
+//@access public
 exports.createFilterObj = (req, res, next) => {
   let filterObject = {};
   if (req.params.categoryId)
@@ -19,19 +20,19 @@ exports.createFilterObj = (req, res, next) => {
 //@desc   Get list of subCategories
 //@route  GET api/v1/subcategories
 //@access public
-exports.getSubCategories = factoryHandler.getAll(SubCategory);
+exports.getSubCategories = factory.getAll(SubCategory);
 
 //@decs   get specific subCategory with id
 //@route  GET ap1/v1/subcategory/:id
 //@access public
-exports.getSpecificSubCategory = factoryHandler.getOne(SubCategory);
+exports.getSpecificSubCategory = factory.getOne(SubCategory);
 
 //@desc    update subCategory /:id
 //@route   PUT api/v1/subcategories/:id
 //@access  private
-exports.updateSubCategory = factoryHandler.updateOne(SubCategory);
+exports.updateSubCategory = factory.updateOne(SubCategory);
 
 //@desc    delete subCategory /:id
 //@route   DELETE api/v1/subcategories/:id
 //@access  private
-exports.deleteSubCategory = factoryHandler.deleteOne(SubCategory);
+exports.deleteSubCategory = factory.deleteOne(SubCategory);

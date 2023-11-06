@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const mongoose = require("mongoose");
 
 const brandSchema = new mongoose.Schema(
@@ -15,5 +14,21 @@ const brandSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+const setImageURL = (doc) => {
+  if (doc.image) {
+    const imageURL = `${process.env.BASE_URL}/brands/${doc.image}`;
+    doc.image = imageURL;
+  }
+};
+
+//findAll , findOne , update
+brandSchema.post("init", (doc) => {
+  setImageURL(doc);
+});
+
+// create
+brandSchema.post("save", (doc) => {
+  setImageURL(doc);
+});
 
 module.exports = new mongoose.model("Brand", brandSchema);

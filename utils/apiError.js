@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-expressions */
-//desc this class is responsible for operational error(error i can predict)
+//@desc this class is responsible for operational error(error i can predict)
 class ApiError extends Error {
   constructor(message, statusCode) {
     super(message);
